@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+
+<div class="container main">
+    <h1>All Matches</h1>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>Match ID</th>
+                <th>Game</th>
+                <th colspan="2">League</th>
+                <th>Start Time</th>
+                <th colspan="2">Home Team</th>
+                <th colspan="2">Away Team</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i < matches.length; i++) { %>
+            <tr>
+                <td><a href="/bets/new/<%= matches[i].id %>"><%= matches[i].id %></a></td>
+                <td><%= matches[i].videogame.name %></td>
+                <td><%= matches[i].league.name %></td>
+                <td><img width="75em" height="75em" src="<%= matches[i].league.image_url %>"></td>
+                <% if (matches[i].begin_at) { %>
+                <td><%= matches[i].begin_at %></td>
+                <% } else { %>
+                <td>Time not finalized</td>
+                <% } %>
+                <% for(var j=0; j < matches[i].opponents.length; j++) { %>
+                    <td><%= matches[i].opponents[j].opponent.name %></td>
+                    <td><img width="75em" height="75em" src="<%= matches[i].opponents[j].opponent.image_url %>"></td>
+                <% } %>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+<% include ../partials/footer %>

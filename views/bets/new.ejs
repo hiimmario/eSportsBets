@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+
+<div class="ui main text container">
+    <h1>New Bet</h1>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Game</th>
+            <th colspan="2">League</th>
+            <th>Start Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><%= match[0].videogame.name %></td>
+            <td><%= match[0].league.name %></td>
+            <td><img width="75em" height="75em" src="<%= match[0].league.image_url %>"></td>
+            <% if (match[0].begin_at) { %>
+            <td><%= match[0].begin_at %></td>
+            <% } else { %>
+            <td>Time not finalized</td>
+            <% } %>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th colspan="2">Home Team</th>
+            <th colspan="2">Away Team</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <% for(var j=0; j < match[0].opponents.length; j++) { %>
+            <td><%= match[0].opponents[j].opponent.name %></td>
+            <td><img width="75em" height="75em" src="<%= match[0].opponents[j].opponent.image_url %>"></td>
+            <% } %>
+        </tr>
+        </tbody>
+    </table>
+
+    <form class="ui form" action="/bets" method="POST">
+        <div class="field inverted">
+            <label>Match ID</label>
+            <input type="text" readonly name="bet[matchId]" value="<%= match[0].id %>">
+        </div>
+        <div class="field">
+            <label>From Address</label>
+            <input type="text" name="bet[fromAddress]" placeholder="From Address">
+        </div>
+        <div class="field">
+            <label>Private Key</label>
+            <input type="text" name="privateKey" placeholder="Private Key">
+        </div>
+        <div class="field">
+            <label>Bet Amount (in ether)</label>
+            <input type="text" name="bet[betAmount]" placeholder="Bet Amount (in ether)">
+        </div>
+
+        <input type="hidden" name="bet[videogame]" value="<%= match[0].videogame.name %>">
+        <input type="hidden" name="bet[league]" value="<%= match[0].league.name %>">
+        <input type="hidden" name="bet[league_imageurl]" value="<%= match[0].league.image_url %>">
+        <input type="hidden" name="bet[begin_at]" value="<%= match[0].begin_at %>">
+        <input type="hidden" name="bet[opponent1_name]" value="<%= match[0].opponents[0].opponent.name %>">
+        <input type="hidden" name="bet[opponent1_imageurl]" value="<%= match[0].opponents[0].opponent.image_url %>">
+        <input type="hidden" name="bet[opponent2_name]" value="<%= match[0].opponents[1].opponent.name %>">
+        <input type="hidden" name="bet[opponent2_imageurl]" value="<%= match[0].opponents[1].opponent.image_url %>">
+
+        <button class="ui button" type="submit">Submit Bet</button>
+    </form>
+</div>
+
+<% include ../partials/footer %>
+

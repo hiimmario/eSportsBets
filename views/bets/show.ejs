@@ -1,0 +1,75 @@
+<% include ../partials/header %>
+
+<div class="ui main text container">
+    <h1>Bet</h1>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Game</th>
+            <th colspan="2">League</th>
+            <th>Start Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><%= match.videogame %></td>
+            <td><%= match.league %></td>
+            <td><img width="75em" height="75em" src="<%= match.league_imageurl %>"></td>
+            <% if (match.begin_at) { %>
+            <td><%= match.begin_at %></td>
+            <% } else { %>
+            <td>Time not finalized</td>
+            <% } %>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th colspan="2">Home Team</th>
+            <th colspan="2">Away Team</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><%= match.opponent1_name %></td>
+            <td><img width="75em" height="75em" src="<%= match.opponent1_imageurl %>"></td>
+            <td><%= match.opponent2_name %></td>
+            <td><img width="75em" height="75em" src="<%= match.opponent2_imageurl %>"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+        <div>
+            <% match.comments.forEach(function(comment) { %>
+            <div class="comment">
+                <div class="content">
+                    <a class="author"><%= comment.author.username %></a>
+                    <div class="metadata">
+                        <span class="date"><%= comment.created %></span>
+                    </div>
+                    <div class="text">
+                        <%= comment.text %>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+
+
+    <form class="ui reply form" action="/bets/<%= match._id %>/comments/new" method="POST">
+        <div class="field">
+            <textarea name="comment[text]"></textarea>
+        </div>
+        <button class="ui button" type="submit">New Comment</button>
+    </form>
+
+</div>
+
+<% include ../partials/footer %>
+

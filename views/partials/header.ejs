@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>eSport Bets</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/app.css" />
+</head>
+
+<body>
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+        <div class="header item"></i>eSports Bets</div>
+        <a href="/matches" class="item">All Matches</a>
+        <a href="/bets" class="item">All Bets</a>
+        <div class="right menu">
+            <% if(!user) { %>
+                <a class="item" href="/register">Register</a>
+                <a class="item" href="/login">Login</a>
+            <% } else { %>
+            <span class="item">Signed in as <%= user.username %></span>
+            <a class="item" href="/logout">Log Out</a>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<% if(success && success.length > 0) { %>
+<div class="container main">
+<div class="ui positive message">
+    <div class="header">
+        <%= success %>
+    </div>
+</div>
+</div>
+<% } %>
+<% if(error && error.length > 0) { %>
+<div class="container main">
+<div class="ui negative message">
+    <div class="header">
+        <%= error %>
+    </div>
+</div>
+</div>
+<% } %>
