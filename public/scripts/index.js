@@ -76,7 +76,7 @@ deployContractButton.addEventListener("click", function() {
     //================================================
     var contract = myweb3.eth.contract(abi);
 
-    var gas = 470000000;
+    var gas = 47000000;
 
     var  params = {
         from: myweb3.eth.defaultAccount,
