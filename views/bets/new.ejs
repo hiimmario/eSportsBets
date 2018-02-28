@@ -66,7 +66,19 @@
         <button class="ui button" type="submit">Submit Bet</button>
     </form>
 
-    <button id="deployContractButton">Deploy Contract</button>
+    <button class="ui button" id="deployContractButton">Deploy Contract</button>
+
+    <div class="deployedContract" hidden>
+        <div class="ui inverted divider"></div>
+
+        <div class="ui labeled input">
+            <div class="ui label">
+                Deployed Contract Address:
+            </div>
+            <input id="deployedContractAddress" type="text">
+        </div>
+    </div>
+
 </div>
 
 <!-- TODO check for possibility and what makes sense to include different footers related to include files -->

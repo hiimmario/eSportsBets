@@ -1,6 +1,9 @@
 var myweb3 = new Web3(web3.currentProvider);
 var deployContractButton = document.querySelector("#deployContractButton");
 
+/**
+ * Deploy given contract (compiled in remix meanwhile)
+ */
 deployContractButton.addEventListener("click", function() {
     // define contract compiled in remix
     //================================================
@@ -73,7 +76,7 @@ deployContractButton.addEventListener("click", function() {
     //================================================
     var contract = myweb3.eth.contract(abi);
 
-    var gas = 47000000;
+    var gas = 470000000;
 
     var  params = {
         from: myweb3.eth.defaultAccount,
@@ -102,18 +105,8 @@ deployContractButton.addEventListener("click", function() {
                 // });
 
             } else {
-                // gets set in the first call
-                // console.log("contract transaction hash: " + result.transactionHash);
+                // result.transactionHash gets set in the first call
                 console.log(createEtherscanIoUrl('tx', result.transactionHash));
-
-                // myweb3.eth.getTransaction(result.transactionHash, function(error, result) {
-                //     if(error) {
-                //         console.log(error);
-                //     }
-                //     else {
-                //         console.log("transaction: " + result);
-                //     }
-                // });
 
                 pollTransactionReceipt(result.transactionHash);
             }
@@ -122,9 +115,6 @@ deployContractButton.addEventListener("click", function() {
         }
     });
 });
-
-
-
 
 /**
  * Create the etherscan link
@@ -144,7 +134,9 @@ function createEtherscanIoUrl(type,hashOrNumber){
     return url;
 }
 
-
+/**
+ * Polls transaction receipt for deployed contract until contract getsproperly deployed
+ */
 function pollTransactionReceipt(transactionHash) {
     var delay = 1000;
 
@@ -159,8 +151,14 @@ function pollTransactionReceipt(transactionHash) {
                 }, delay);
             }
             else {
+                showDeployedContract(result.contractAddress);
                 console.log(createEtherscanIoUrl('address', result.contractAddress));
             }
         }
     });
+}
+
+function showDeployedContract(contractAddress) {
+    document.getElementById("deployedContract").style.display = "block";
+    document.getElementById("deployedContractAddress").val(contractAddress);
 }

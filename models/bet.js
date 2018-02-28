@@ -3,7 +3,6 @@ var mongoose                = require("mongoose");
 // mongoose model config
 var betSchema = new mongoose.Schema({
     matchId: String,
-    fromAddress: String,
     betAmount: Number,
     videogame: String,
     league: String,

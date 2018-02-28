@@ -60,7 +60,6 @@ router.get("/new/:matchid", middleware.isLoggedIn, function(req, res) {
 router.post("/", middleware.isLoggedIn, function(req, res) {
 
     var matchId             = req.body.bet.matchId;
-    var fromAddress         = req.body.bet.fromAddress;
     var betAmount           = req.body.bet.betAmount;
     var videogame           = req.body.bet.videogame;
     var league              = req.body.bet.league;
@@ -78,7 +77,6 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 
     var newBet = {
         matchId: matchId,
-        fromAddress: fromAddress,
         betAmount: betAmount,
         videogame: videogame,
         league: league,
