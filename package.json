@@ -22,3 +22,7 @@
     "passport-local-mongoose": "^4.5.0"
   }
 }
+
+// bower
+// bower install web3
+

@@ -17,6 +17,8 @@ var matchesRoutes               = require("./routes/matches");
 var commentsRoutes              = require("./routes/comments");
 
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/bower_components"));
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
