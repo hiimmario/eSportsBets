@@ -88,7 +88,7 @@ deployContractButton.addEventListener("click", function() {
 
     contract.new(constructor_param,params,function(error,result){
         if (!error) {
-            // should get set within second fallback call, doesnt... polltransactionReceipt in first fallback call
+            // result.address gets set within second call of fallback function
             if (result.address) {
                 // gets set in the second call
                 console.log(createEtherscanIoUrl('address', result.address));
@@ -102,9 +102,6 @@ deployContractButton.addEventListener("click", function() {
             console.log("error contract.new: " + error);
         }
     });
-
-    // test ui
-    //pollTransactionReceipt("contractaddress");
 });
 
 /**
