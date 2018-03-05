@@ -53,6 +53,7 @@ router.get("/new/:matchid", middleware.isLoggedIn, function(req, res) {
         data[0].begin_at = date.toLocaleDateString('en-US', options);
 
         res.render("bets/new", {match: data});
+
     });
 });
 
