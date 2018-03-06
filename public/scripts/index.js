@@ -1,92 +1,135 @@
 var myweb3 = new Web3(web3.currentProvider);
 var deployContractButton = document.querySelector("#deployContractButton");
+var takeBetButton = document.querySelector("#takeBetButton");
+var setWinnerButton = document.querySelector("#setWinnerButton");
+
+var bytecode = "0x60606040526040516040806103cc83398101604052808051906020019091908051906020019091905050600181141561007757336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506100b9565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b346002819055508160038190555050506102f4806100d86000396000f300606060405260043610610078576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063116625151461007d57806320a0fdbc146100d25780634d9b37351461012757806399892e4714610150578063c89f2ce414610179578063df898e32146101a2575b600080fd5b341561008857600080fd5b6100906101c3565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156100dd57600080fd5b6100e56101e9565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561013257600080fd5b61013a61020e565b6040518082815260200191505060405180910390f35b341561015b57600080fd5b610163610218565b6040518082815260200191505060405180910390f35b341561018457600080fd5b61018c61021e565b6040518082815260200191505060405180910390f35b6101c16004808035906020019091908035906020019091905050610224565b005b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000600254905090565b60035481565b60025481565b600182141561027257336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506102b4565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b3460026000828254019250508190555050505600a165627a7a72305820dbcf63f51d7e66d369c52941d876b02e062c790dbab78acdaebb3d2b0185dcfb0029";
+var abi = [
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "team2bet",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "team1bet",
+        "outputs": [
+            {
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "matchId",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "funds",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_matchId",
+                "type": "uint256"
+            },
+            {
+                "name": "_choice",
+                "type": "uint256"
+            }
+        ],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "constructor"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_choice",
+                "type": "uint256"
+            },
+            {
+                "name": "_amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "makeBet",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "getFunds",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+];
 
 /**
- * Deploy given contract (compiled in remix meanwhile)
+ * Deploy given contract
  */
 deployContractButton.addEventListener("click", function() {
-    // define contract compiled in remix
-    //================================================
-    var bytecode = "0x6060604052341561000f57600080fd5b60405160208061017a833981016040528080519060200190919050508060008190555050610138806100426000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806367e0badb14610051578063cd16ecbf1461007a575b600080fd5b341561005c57600080fd5b61006461009d565b6040518082815260200191505060405180910390f35b341561008557600080fd5b61009b60048080359060200190919050506100a6565b005b60008054905090565b600080549050816000819055506000546001026000191681600102600019163373ffffffffffffffffffffffffffffffffffffffff167f108fd0bf2253f6baf35f111ba80fb5369c2e004b88e36ac8486fcee0c87e61ce60405160405180910390a450505600a165627a7a72305820b3dd05a446e4e1a7bb3175b3af980801e481458ced7d3305c8596b6d1b5175880029";
-    var abi = [
-        {
-            "constant": false,
-            "inputs": [],
-            "name": "getNum",
-            "outputs": [
-                {
-                    "name": "n",
-                    "type": "uint256"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "constant": false,
-            "inputs": [
-                {
-                    "name": "n",
-                    "type": "uint256"
-                }
-            ],
-            "name": "setNum",
-            "outputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "name": "x",
-                    "type": "uint256"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": true,
-                    "name": "caller",
-                    "type": "address"
-                },
-                {
-                    "indexed": true,
-                    "name": "oldNum",
-                    "type": "bytes32"
-                },
-                {
-                    "indexed": true,
-                    "name": "newNum",
-                    "type": "bytes32"
-                }
-            ],
-            "name": "NumberSetEvent",
-            "type": "event"
-        }
-    ];
 
-    //deploy contract defined in remix
+    //deploy contract defined and tested with truffle
     //================================================
     var contract = myweb3.eth.contract(abi);
 
     var gas = 4700000;
 
-    var  params = {
+    var  txnObject = {
         from: myweb3.eth.defaultAccount,
         data: bytecode,
-        gas: gas
+        gas: gas,
+        value: 2500000000000000
     };
 
-    var constructor_param = 10;
-
-    contract.new(constructor_param,params,function(error,result){
+    //constructor params!
+    contract.new(30010, 1, txnObject,function(error,result){
         if (!error) {
             // result.address gets set within second call of fallback function
             if (result.address) {
@@ -103,6 +146,36 @@ deployContractButton.addEventListener("click", function() {
         }
     });
 });
+
+/**
+ * setWinner
+ */
+
+
+/**
+ * takeBet
+ */
+takeBetButton.addEventListener("click", function() {
+    var contractAddress = document.getElementById("deployedContractAddress").value;
+    var contract = myweb3.eth.contract(abi);
+    var instance = contract.at(contractAddress);
+
+    console.log(instance);
+
+    var  txnObject = {
+        from: myweb3.eth.defaultAccount,
+        gas: 4700000,
+        value: 2500000000000000
+    };
+
+    instance.makeBet.sendTransaction(2, txnObject, function(error, result) {
+        if(error) console.log(error);
+        else {
+            console.log(result);
+        }
+    });
+});
+
 
 /**
  * Create the etherscan link
@@ -151,5 +224,5 @@ function pollTransactionReceipt(transactionHash) {
 
 function showDeployedContract(contractAddress) {
     document.getElementById("deployedContract").style.display = "block";
-    document.getElementById("deployedContractAddress").value = createEtherscanIoUrl('address', contractAddress);
+    document.getElementById("deployedContractAddress").value = contractAddress;
 }
