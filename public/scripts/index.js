@@ -1,9 +1,10 @@
 var myweb3 = new Web3(web3.currentProvider);
 var deployContractButton = document.querySelector("#deployContractButton");
 var takeBetButton = document.querySelector("#takeBetButton");
-var setWinnerButton = document.querySelector("#setWinnerButton");
+var setWinnerTeam1Button = document.querySelector("#setWinnerTeam1Button");
+var setWinnerTeam2Button = document.querySelector("#setWinnerTeam2Button");
 
-var bytecode = "0x60606040526040516040806103cc83398101604052808051906020019091908051906020019091905050600181141561007757336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506100b9565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b346002819055508160038190555050506102f4806100d86000396000f300606060405260043610610078576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063116625151461007d57806320a0fdbc146100d25780634d9b37351461012757806399892e4714610150578063c89f2ce414610179578063df898e32146101a2575b600080fd5b341561008857600080fd5b6100906101c3565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156100dd57600080fd5b6100e56101e9565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561013257600080fd5b61013a61020e565b6040518082815260200191505060405180910390f35b341561015b57600080fd5b610163610218565b6040518082815260200191505060405180910390f35b341561018457600080fd5b61018c61021e565b6040518082815260200191505060405180910390f35b6101c16004808035906020019091908035906020019091905050610224565b005b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000600254905090565b60035481565b60025481565b600182141561027257336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506102b4565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b3460026000828254019250508190555050505600a165627a7a72305820dbcf63f51d7e66d369c52941d876b02e062c790dbab78acdaebb3d2b0185dcfb0029";
+var bytecode = "0x606060405260405160408061060583398101604052808051906020019091908051906020019091905050600181141561007757336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506100b9565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b816002819055505050610534806100d16000396000f300606060405260043610610083576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630df716021461008857806311662515146100c3578063153dc1821461011857806320a0fdbc146101415780634d9b373514610196578063718cc769146101bf57806399892e47146101d7575b600080fd5b341561009357600080fd5b6100a96004808035906020019091905050610200565b604051808215151515815260200191505060405180910390f35b34156100ce57600080fd5b6100d66103fb565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561012357600080fd5b61012b610421565b6040518082815260200191505060405180910390f35b341561014c57600080fd5b61015461042b565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101a157600080fd5b6101a9610450565b6040518082815260200191505060405180910390f35b6101d5600480803590602001909190505061046f565b005b34156101e257600080fd5b6101ea610502565b6040518082815260200191505060405180910390f35b6000600182141561027e576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050506103f2565b60028214156102fb57600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050506103f1565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc60023073ffffffffffffffffffffffffffffffffffffffff163181151561035957fe5b049081150290604051600060405180830381858888f1935050505050600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc60023073ffffffffffffffffffffffffffffffffffffffff16318115156103d457fe5b049081150290604051600060405180830381858888f19350505050505b5b60019050919050565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000600254905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60003073ffffffffffffffffffffffffffffffffffffffff1631905090565b60018114156104bd57336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506104ff565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b50565b600254815600a165627a7a7230582081e7c1e23faaf9e63a88b1bddf0897af6d43a32ea6c8f2714ef6ee5d0f74ca9e0029";
 var abi = [
     {
         "constant": true,
@@ -48,20 +49,6 @@ var abi = [
         "type": "function"
     },
     {
-        "constant": true,
-        "inputs": [],
-        "name": "funds",
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "name": "_matchId",
@@ -82,10 +69,6 @@ var abi = [
             {
                 "name": "_choice",
                 "type": "uint256"
-            },
-            {
-                "name": "_amount",
-                "type": "uint256"
             }
         ],
         "name": "makeBet",
@@ -97,11 +80,44 @@ var abi = [
     {
         "constant": false,
         "inputs": [],
+        "name": "getMatchId",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
         "name": "getFunds",
         "outputs": [
             {
                 "name": "",
                 "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "winner",
+                "type": "uint256"
+            }
+        ],
+        "name": "setWinner",
+        "outputs": [
+            {
+                "name": "",
+                "type": "bool"
             }
         ],
         "payable": false,
@@ -119,13 +135,11 @@ deployContractButton.addEventListener("click", function() {
     //================================================
     var contract = myweb3.eth.contract(abi);
 
-    var gas = 4700000;
-
     var  txnObject = {
         from: myweb3.eth.defaultAccount,
         data: bytecode,
-        gas: gas,
-        value: 2500000000000000
+        gas: 4465034,
+        value: 15000000000000000
     };
 
     //constructor params!
@@ -139,7 +153,7 @@ deployContractButton.addEventListener("click", function() {
             } else {
                 // first callback call result address is not given
                 console.log(createEtherscanIoUrl('tx', result.transactionHash));
-                // pollTransactionReceipt(result.transactionHash);
+                pollTransactionReceipt(result.transactionHash);
             }
         } else {
             console.log("error contract.new: " + error);
@@ -150,32 +164,70 @@ deployContractButton.addEventListener("click", function() {
 /**
  * setWinner
  */
+setWinnerTeam1Button.addEventListener("click", function() {
+    var contractAddress = document.getElementById("deployedContractAddress").value;
+    var team = 1;
+    var contract = myweb3.eth.contract(abi);
+    var instance = contract.at(contractAddress);
 
+    var  txnObject = {
+        from: myweb3.eth.defaultAccount,
+        gas: 4465034
+    };
+
+    instance.setWinner.sendTransaction(team, txnObject, function(error, result)  {
+
+        if(error) console.log(error);
+        else {
+            console.log(createEtherscanIoUrl('tx', result));
+        }
+    });
+});
+
+setWinnerTeam2Button.addEventListener("click", function() {
+    var contractAddress = document.getElementById("deployedContractAddress").value;
+    var team = 2;
+    var contract = myweb3.eth.contract(abi);
+    var instance = contract.at(contractAddress);
+
+
+    var  txnObject = {
+        from: myweb3.eth.defaultAccount,
+        gas: 4465034
+    };
+
+    instance.setWinner.sendTransaction(team, txnObject, function(error, result)  {
+
+        if(error) console.log(error);
+        else {
+            console.log(createEtherscanIoUrl('tx', result));
+        }
+    });
+});
 
 /**
  * takeBet
  */
 takeBetButton.addEventListener("click", function() {
     var contractAddress = document.getElementById("deployedContractAddress").value;
+    var team = 2;
     var contract = myweb3.eth.contract(abi);
     var instance = contract.at(contractAddress);
 
-    console.log(instance);
-
     var  txnObject = {
         from: myweb3.eth.defaultAccount,
-        gas: 4700000,
-        value: 2500000000000000
+        gas: 4465034,
+        value: 15000000000000000
     };
 
-    instance.makeBet.sendTransaction(2, txnObject, function(error, result) {
+    instance.makeBet.sendTransaction(team, txnObject, function(error, result)  {
+
         if(error) console.log(error);
         else {
-            console.log(result);
+            console.log(createEtherscanIoUrl('tx', result));
         }
     });
 });
-
 
 /**
  * Create the etherscan link
@@ -217,9 +269,6 @@ function pollTransactionReceipt(transactionHash) {
             }
         }
     });
-
-    // test ui
-    //showDeployedContract(transactionHash);
 }
 
 function showDeployedContract(contractAddress) {

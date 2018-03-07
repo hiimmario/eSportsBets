@@ -34,7 +34,7 @@ router.get("/:id", function(req, res) {
 });
 
 // new route
-router.get("/new/:matchid", middleware.isLoggedIn, function(req, res) {
+router.get("/new/:matchid", function(req, res) {
     var matchId = req.params.matchid;
     client.get("https://api.pandascore.co/matches?filter[id]=" + matchId + "&token=xFEMHt5iIXzTaDydesV2fk01-L-YKp7OFLcZcWZJ4tav2Og-7jA", function (data, response) {
 
