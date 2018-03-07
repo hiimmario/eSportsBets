@@ -62,8 +62,6 @@
 
         <input type="hidden" name="open_team" id="open_team" value="<%= match.open_team %>">
 
-        open_team
-
         <div class="ui inverted divider"></div>
         <button class="ui button" id="takeBetButton">Take Bet on Team <%= match.open_team %></button>
         <button class="ui negative basic button" id="setWinnerTeam0Button">Set Winner Team 0</button>
@@ -88,7 +86,6 @@
             <% }); %>
         </div>
     </div>
-
 
     <form class="ui reply form" action="/bets/<%= match._id %>/comments/new" method="POST">
         <div class="field">
