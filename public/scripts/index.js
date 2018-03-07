@@ -131,6 +131,10 @@ var abi = [
  */
 deployContractButton.addEventListener("click", function() {
 
+    var matchId = document.querySelector("#matchId").value;
+    var betAmount = document.querySelector("#betAmount").value*1000000000000000000;
+    var team4bet = document.querySelector("#team4bet").value;
+
     //deploy contract defined and tested with truffle
     //================================================
     var contract = myweb3.eth.contract(abi);
@@ -139,11 +143,11 @@ deployContractButton.addEventListener("click", function() {
         from: myweb3.eth.defaultAccount,
         data: bytecode,
         gas: 4465034,
-        value: 15000000000000000
+        value: betAmount
     };
 
     //constructor params!
-    contract.new(30010, 1, txnObject,function(error,result){
+    contract.new(matchId, team4bet, txnObject,function(error,result){
         if (!error) {
             // result.address gets set within second call of fallback function
             if (result.address) {
@@ -153,7 +157,7 @@ deployContractButton.addEventListener("click", function() {
             } else {
                 // first callback call result address is not given
                 console.log(createEtherscanIoUrl('tx', result.transactionHash));
-                pollTransactionReceipt(result.transactionHash);
+                //pollTransactionReceipt(result.transactionHash);
             }
         } else {
             console.log("error contract.new: " + error);

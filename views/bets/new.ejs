@@ -45,15 +45,25 @@
     <form class="ui form" action="/bets" method="POST">
         <div class="field inverted">
             <label>Match ID</label>
-            <input type="text" readonly name="bet[matchId]" value="<%= match[0].id %>">
+            <input type="text" readonly id="matchId" name="bet[matchId]" value="<%= match[0].id %>">
         </div>
         <div class="field">
             <label>Bet Amount (in ether)</label>
-            <input type="text" name="bet[betAmount]" placeholder="Bet Amount (in ether)">
+            <input type="text" id="betAmount" name="bet[betAmount]" placeholder="Bet Amount (in ether)">
+        </div>
+
+        <!-- TODO values  teamname -> int to string in contract! -->
+        <div class="field">
+            <label>Team</label>
+            <select id="team4bet" class="dropdown">
+                <option value="">Choose your Team</option>
+                <option value="1"><%= match[0].opponents[0].opponent.name %></option>
+                <option value="2"><%= match[0].opponents[1].opponent.name %></option>
+            </select>
         </div>
 
         <!-- TODO check if there is a better possibility to add hidden fields! -->
-        <!-- clean up fields from what is really used and what not -->
+        <!-- TODO clean up fields from what is really used and what not -->
         <input type="hidden" name="bet[videogame]" value="<%= match[0].videogame.name %>">
         <input type="hidden" name="bet[league]" value="<%= match[0].league.name %>">
         <input type="hidden" name="bet[league_imageurl]" value="<%= match[0].league.image_url %>">
