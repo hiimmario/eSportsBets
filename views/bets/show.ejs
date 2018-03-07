@@ -42,8 +42,36 @@
         </tbody>
     </table>
 
+    <div id="deployedContract">
+
+        <div class="ui fluid form">
+            <div class="inline field">
+                <div class="ui right pointing label">
+                    Contract Address on Etherscan
+                </div>
+                <input id="deployedContractAddress" size="50" readonly type="text" value="<%= match.contract_address %>">
+            </div>
+
+            <div class="inline field">
+                <div class="ui right pointing label">
+                    Bet Amount:
+                </div>
+                <input id="betAmount" readonly type="text" value="<%= match.betAmount %>">
+            </div>
+        </div>
+
+        <input type="hidden" name="open_team" id="open_team" value="<%= match.open_team %>">
+
+        open_team
+
+        <div class="ui inverted divider"></div>
+        <button class="ui button" id="takeBetButton">Take Bet on Team <%= match.open_team %></button>
+        <button class="ui negative basic button" id="setWinnerTeam0Button">Set Winner Team 0</button>
+        <button class="ui negative basic button" id="setWinnerTeam1Button">Set Winner Team 1</button>
+    </div>
+
     <div class="ui comments">
-        <h3 class="ui dividing header">Comments</h3>
+        <h3 class="ui header">Comments</h3>
         <div>
             <% match.comments.forEach(function(comment) { %>
             <div class="comment">
@@ -71,5 +99,9 @@
 
 </div>
 
-<% include ../partials/footer %>
+<!-- TODO check for possibility and what makes sense to include different footers related to include files -->
+<script type="text/javascript" src="../../web3/dist/web3.min.js"></script>
+<script type="text/javascript" src="../../scripts/showBet.js"></script>
+</body>
+</html>
 

@@ -42,7 +42,7 @@
         </tbody>
     </table>
 
-    <form class="ui form" action="/bets" method="POST">
+    <form class="ui form" name="submitBet" action="/bets" method="POST">
         <div class="field inverted">
             <label>Match ID</label>
             <input type="text" readonly id="matchId" name="bet[matchId]" value="<%= match[0].id %>">
@@ -53,12 +53,13 @@
         </div>
 
         <!-- TODO values  teamname -> int to string in contract! -->
+        <!-- TODO values to teamname only mapping between teamname for contract!!!! -->
         <div class="field">
             <label>Team</label>
             <select id="team4bet" class="dropdown">
                 <option value="">Choose your Team</option>
-                <option value="1"><%= match[0].opponents[0].opponent.name %></option>
-                <option value="2"><%= match[0].opponents[1].opponent.name %></option>
+                <option value="0"><%= match[0].opponents[0].opponent.name %></option>
+                <option value="1"><%= match[0].opponents[1].opponent.name %></option>
             </select>
         </div>
 
@@ -72,31 +73,19 @@
         <input type="hidden" name="bet[opponent1_imageurl]" value="<%= match[0].opponents[0].opponent.image_url %>">
         <input type="hidden" name="bet[opponent2_name]" value="<%= match[0].opponents[1].opponent.name %>">
         <input type="hidden" name="bet[opponent2_imageurl]" value="<%= match[0].opponents[1].opponent.image_url %>">
+        <input type="hidden" name="bet[contract_address]" id="deployedContractAddress">
+        <input type="hidden" name="bet[set_team]" id="set_team">
+        <input type="hidden" name="bet[open_team]" id="open_team">
 
-        <button class="ui button" type="submit">Submit Bet</button>
     </form>
 
     <button class="ui button" id="deployContractButton">Deploy Contract</button>
-    <button class="ui button" id="takeBetButton">Take Bet</button>
-    <button class="ui button" id="setWinnerTeam1Button">Set Winner Team 1</button>
-    <button class="ui button" id="setWinnerTeam2Button">Set Winner Team 2</button>
-
-    <div id="deployedContract" hidden>
-        <div class="ui inverted divider"></div>
-
-        <div class="ui labeled input">
-            <div class="ui label">
-                Deployed Contract Address:
-            </div>
-            <input id="deployedContractAddress" readonly type="text">
-        </div>
-    </div>
 
 </div>
 
 <!-- TODO check for possibility and what makes sense to include different footers related to include files -->
 <script type="text/javascript" src="../../web3/dist/web3.min.js"></script>
-<script type="text/javascript" src="../../scripts/index.js"></script>
+<script type="text/javascript" src="../../scripts/newBet.js"></script>
 </body>
 </html>
 

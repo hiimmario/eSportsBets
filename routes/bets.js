@@ -58,7 +58,7 @@ router.get("/new/:matchid", function(req, res) {
 });
 
 // create route
-router.post("/", middleware.isLoggedIn, function(req, res) {
+router.post("/", function(req, res) {
 
     var matchId             = req.body.bet.matchId;
     var betAmount           = req.body.bet.betAmount;
@@ -70,6 +70,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
     var opponent1_imageurl  = req.body.bet.opponent1_imageurl;
     var opponent2_name      = req.body.bet.opponent2_name;
     var opponent2_imageurl  = req.body.bet.opponent2_imageurl;
+    var contract_address    = req.body.bet.contract_address;
+    var open_team           = req.body.bet.open_team;
+    var set_team            = req.body.bet.set_team;
 
     var author = {
         id: req.user._id,
@@ -87,7 +90,10 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         opponent2_name: opponent2_name,
         opponent1_imageurl: opponent1_imageurl,
         opponent2_imageurl: opponent2_imageurl,
-        author: author
+        author: author,
+        contract_address: contract_address,
+        open_team: open_team,
+        set_team: set_team
     };
 
     bet.create(newBet, function(err, newBet) {
@@ -95,7 +101,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
             console.log(err);
         }
         else {
-            res.redirect("/bets");
+            res.redirect("/bets/" + newBet._id);
         }
     })
 });

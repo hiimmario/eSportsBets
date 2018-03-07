@@ -27,7 +27,10 @@ var betSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "comment"
         }
-    ]
+    ],
+    contract_address: String,
+    set_team: Number,
+    open_team: Number
 });
 
 module.exports = mongoose.model("bet", betSchema);

@@ -1,15 +1,15 @@
 var myweb3 = new Web3(web3.currentProvider);
 var deployContractButton = document.querySelector("#deployContractButton");
-var takeBetButton = document.querySelector("#takeBetButton");
-var setWinnerTeam1Button = document.querySelector("#setWinnerTeam1Button");
-var setWinnerTeam2Button = document.querySelector("#setWinnerTeam2Button");
+// var takeBetButton = document.querySelector("#takeBetButton");
+// var setWinnerTeam0Button = document.querySelector("#setWinnerTeam0Button");
+// var setWinnerTeam1Button = document.querySelector("#setWinnerTeam1Button");
 
-var bytecode = "0x606060405260405160408061060583398101604052808051906020019091908051906020019091905050600181141561007757336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506100b9565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b816002819055505050610534806100d16000396000f300606060405260043610610083576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630df716021461008857806311662515146100c3578063153dc1821461011857806320a0fdbc146101415780634d9b373514610196578063718cc769146101bf57806399892e47146101d7575b600080fd5b341561009357600080fd5b6100a96004808035906020019091905050610200565b604051808215151515815260200191505060405180910390f35b34156100ce57600080fd5b6100d66103fb565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561012357600080fd5b61012b610421565b6040518082815260200191505060405180910390f35b341561014c57600080fd5b61015461042b565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101a157600080fd5b6101a9610450565b6040518082815260200191505060405180910390f35b6101d5600480803590602001909190505061046f565b005b34156101e257600080fd5b6101ea610502565b6040518082815260200191505060405180910390f35b6000600182141561027e576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050506103f2565b60028214156102fb57600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050506103f1565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc60023073ffffffffffffffffffffffffffffffffffffffff163181151561035957fe5b049081150290604051600060405180830381858888f1935050505050600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc60023073ffffffffffffffffffffffffffffffffffffffff16318115156103d457fe5b049081150290604051600060405180830381858888f19350505050505b5b60019050919050565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000600254905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60003073ffffffffffffffffffffffffffffffffffffffff1631905090565b60018114156104bd57336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506104ff565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b50565b600254815600a165627a7a7230582081e7c1e23faaf9e63a88b1bddf0897af6d43a32ea6c8f2714ef6ee5d0f74ca9e0029";
+var bytecode = "0x606060405260405160408061060483398101604052808051906020019091908051906020019091905050600081141561007757336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506100b9565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b816002819055505050610533806100d16000396000f300606060405260043610610083576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630df7160214610088578063153dc182146100c357806320a0fdbc146100ec578063409bea13146101415780634d9b373514610196578063718cc769146101bf57806399892e47146101d7575b600080fd5b341561009357600080fd5b6100a96004808035906020019091905050610200565b604051808215151515815260200191505060405180910390f35b34156100ce57600080fd5b6100d66103fa565b6040518082815260200191505060405180910390f35b34156100f757600080fd5b6100ff610404565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014c57600080fd5b61015461042a565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156101a157600080fd5b6101a961044f565b6040518082815260200191505060405180910390f35b6101d5600480803590602001909190505061046e565b005b34156101e257600080fd5b6101ea610501565b6040518082815260200191505060405180910390f35b60008082141561027d576000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050506103f1565b60018214156102fa57600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050506103f0565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc60023073ffffffffffffffffffffffffffffffffffffffff163181151561035857fe5b049081150290604051600060405180830381858888f1935050505050600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc60023073ffffffffffffffffffffffffffffffffffffffff16318115156103d357fe5b049081150290604051600060405180830381858888f19350505050505b5b60019050919050565b6000600254905090565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60003073ffffffffffffffffffffffffffffffffffffffff1631905090565b60008114156104bc57336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506104fe565b33600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b50565b600254815600a165627a7a72305820e59c1b6778c64170e3ac2d4b6cb4f09fd72aa5d9e557214da9200fed65c43c5c0029";
 var abi = [
     {
         "constant": true,
         "inputs": [],
-        "name": "team2bet",
+        "name": "team1bet",
         "outputs": [
             {
                 "name": "",
@@ -23,7 +23,7 @@ var abi = [
     {
         "constant": true,
         "inputs": [],
-        "name": "team1bet",
+        "name": "team0bet",
         "outputs": [
             {
                 "name": "",
@@ -135,6 +135,18 @@ deployContractButton.addEventListener("click", function() {
     var betAmount = document.querySelector("#betAmount").value*1000000000000000000;
     var team4bet = document.querySelector("#team4bet").value;
 
+    console.log("team4bet: " + team4bet);
+
+    // TODO SET VALUES FUNCTION!
+    document.getElementById("set_team").value = team4bet;
+    if(team4bet == 0) document.getElementById("open_team").value = 1;
+    else {
+        document.getElementById("open_team").value = 0;
+    }
+
+    console.log("set team: " + document.getElementById("set_team").value);
+    console.log("open team: " + document.getElementById("open_team").value);
+
     //deploy contract defined and tested with truffle
     //================================================
     var contract = myweb3.eth.contract(abi);
@@ -153,7 +165,11 @@ deployContractButton.addEventListener("click", function() {
             if (result.address) {
                 // gets set in the second call
                 console.log(createEtherscanIoUrl('address', result.address));
-                showDeployedContract(result.address);
+
+                // TODO SET VALUES FUNCTION!
+                document.getElementById("deployedContractAddress").value = result.address;
+                // console.log(document.getElementById("deployedContractAddress hidden field").value);
+                document.submitBet.submit();
             } else {
                 // first callback call result address is not given
                 console.log(createEtherscanIoUrl('tx', result.transactionHash));
@@ -165,12 +181,13 @@ deployContractButton.addEventListener("click", function() {
     });
 });
 
+
 /**
  * setWinner
- */
-setWinnerTeam1Button.addEventListener("click", function() {
+ *
+setWinnerTeam0Button.addEventListener("click", function() {
     var contractAddress = document.getElementById("deployedContractAddress").value;
-    var team = 1;
+    var team = 0;
     var contract = myweb3.eth.contract(abi);
     var instance = contract.at(contractAddress);
 
@@ -188,9 +205,9 @@ setWinnerTeam1Button.addEventListener("click", function() {
     });
 });
 
-setWinnerTeam2Button.addEventListener("click", function() {
+setWinnerTeam1Button.addEventListener("click", function() {
     var contractAddress = document.getElementById("deployedContractAddress").value;
-    var team = 2;
+    var team = 1;
     var contract = myweb3.eth.contract(abi);
     var instance = contract.at(contractAddress);
 
@@ -211,17 +228,18 @@ setWinnerTeam2Button.addEventListener("click", function() {
 
 /**
  * takeBet
- */
+ *
 takeBetButton.addEventListener("click", function() {
     var contractAddress = document.getElementById("deployedContractAddress").value;
-    var team = 2;
+    var betAmount = document.querySelector("#betAmount").value*1000000000000000000;
+    var team = document.querySelector("#team4bet").value;
     var contract = myweb3.eth.contract(abi);
     var instance = contract.at(contractAddress);
 
     var  txnObject = {
         from: myweb3.eth.defaultAccount,
         gas: 4465034,
-        value: 15000000000000000
+        value: betAmount
     };
 
     instance.makeBet.sendTransaction(team, txnObject, function(error, result)  {
@@ -232,6 +250,7 @@ takeBetButton.addEventListener("click", function() {
         }
     });
 });
+*/
 
 /**
  * Create the etherscan link
@@ -253,6 +272,7 @@ function createEtherscanIoUrl(type,hashOrNumber){
 
 /**
  * Polls transaction receipt for deployed contract until contract gets properly deployed
+ * Fixes the 2nd callback function call from contract.new
  */
 function pollTransactionReceipt(transactionHash) {
     var delay = 2000;
@@ -269,7 +289,7 @@ function pollTransactionReceipt(transactionHash) {
             }
             else {
                 console.log(createEtherscanIoUrl('address', result.address));
-                showDeployedContract(result.contractAddress);
+                // showDeployedContract(result.contractAddress);
             }
         }
     });
