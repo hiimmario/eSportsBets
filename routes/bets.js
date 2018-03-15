@@ -73,6 +73,8 @@ router.post("/", function(req, res) {
     var contract_address    = req.body.bet.contract_address;
     var open_team           = req.body.bet.open_team;
     var set_team            = req.body.bet.set_team;
+    var open_team_name      = req.body.bet.open_team_name;
+    var set_team_name       = req.body.bet.set_team_name;
 
     var author = {
         id: req.user._id,
@@ -93,7 +95,9 @@ router.post("/", function(req, res) {
         author: author,
         contract_address: contract_address,
         open_team: open_team,
-        set_team: set_team
+        set_team: set_team,
+        open_team_name: open_team_name,
+        set_team_name: set_team_name
     };
 
     bet.create(newBet, function(err, newBet) {

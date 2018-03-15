@@ -57,7 +57,6 @@
         <div class="field">
             <label>Team</label>
             <select id="team4bet" class="dropdown">
-                <option value="">Choose your Team</option>
                 <option value="0"><%= match[0].opponents[0].opponent.name %></option>
                 <option value="1"><%= match[0].opponents[1].opponent.name %></option>
             </select>
@@ -73,9 +72,13 @@
         <input type="hidden" name="bet[opponent1_imageurl]" value="<%= match[0].opponents[0].opponent.image_url %>">
         <input type="hidden" name="bet[opponent2_name]" value="<%= match[0].opponents[1].opponent.name %>">
         <input type="hidden" name="bet[opponent2_imageurl]" value="<%= match[0].opponents[1].opponent.image_url %>">
+
         <input type="hidden" name="bet[contract_address]" id="deployedContractAddress">
+
         <input type="hidden" name="bet[set_team]" id="set_team">
+        <input type="hidden" name="bet[set_team_name]" id="set_team_name">
         <input type="hidden" name="bet[open_team]" id="open_team">
+        <input type="hidden" name="bet[open_team_name]" id="open_team_name">
 
     </form>
 

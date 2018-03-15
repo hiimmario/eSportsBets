@@ -196,6 +196,7 @@ takeBetButton.addEventListener("click", function() {
 /**
  * Create the etherscan link
  */
+// TODO global function, wherever
 function createEtherscanIoUrl(type,hashOrNumber){
 
     var etherscanBaseUrl='https://ropsten.etherscan.io/';

@@ -123,6 +123,47 @@ var abi = [
     }
 ];
 
+//todo get help, literally - crossing out like that, rly?
+function setBetValuesForSubmit(set_team, contractAddress) {
+
+    var setTeamSelect = document.getElementById("team4bet");
+
+    var setTeam;
+    var openTeam;
+    var setTeamName;
+    var openTeamName;
+
+    setTeam = set_team;
+
+    if(set_team == 0) {
+         openTeam = 1;
+    }
+    else {
+        openTeam = 0;
+    }
+
+    setTeamName = setTeamSelect.options[setTeam].text;
+
+    if(setTeam == 0) {
+        openTeamName = setTeamSelect.options[1].text;
+    }
+    else {
+        openTeamName = setTeamSelect.options[0].text;
+    }
+
+    // alert("setTeam val: " + setTeam);
+    // alert("setTeam name: " + setTeamName);
+    // alert("openTeam val: " + openTeam);
+    // alert("openTeam name: " + openTeamName);
+
+    //todo - think about if you really need the set/open team names if i have opponent1 and 2 already stored in the bet
+    document.getElementById("set_team").value = setTeam;
+    document.getElementById("set_team_name").value = setTeamName;
+    document.getElementById("open_team").value = openTeam;
+    document.getElementById("open_team_name").value = openTeamName;
+    document.getElementById("deployedContractAddress").value = contractAddress;
+}
+
 /**
  * Deploy given contract
  */
@@ -130,19 +171,8 @@ deployContractButton.addEventListener("click", function() {
 
     var matchId = document.querySelector("#matchId").value;
     var betAmount = document.querySelector("#betAmount").value*1000000000000000000;
-    var team4bet = document.querySelector("#team4bet").value;
+    var set_team = document.querySelector("#team4bet").value;
 
-    console.log("team4bet: " + team4bet);
-
-    // TODO SET VALUES FUNCTION!
-    document.getElementById("set_team").value = team4bet;
-    if(team4bet == 0) document.getElementById("open_team").value = 1;
-    else {
-        document.getElementById("open_team").value = 0;
-    }
-
-    //deploy contract defined and tested with truffle
-    //================================================
     var contract = myweb3.eth.contract(abi);
 
     var  txnObject = {
@@ -153,16 +183,15 @@ deployContractButton.addEventListener("click", function() {
     };
 
     //constructor params!
-    contract.new(matchId, team4bet, txnObject,function(error,result){
+    contract.new(matchId, set_team, txnObject,function(error,result){
         if (!error) {
             // result.address gets set within second call of fallback function
             if (result.address) {
                 // gets set in the second call
                 console.log(createEtherscanIoUrl('address', result.address));
 
-                // TODO SET VALUES FUNCTION!
-                document.getElementById("deployedContractAddress").value = result.address;
-                // console.log(document.getElementById("deployedContractAddress hidden field").value);
+                setBetValuesForSubmit(set_team, result.address);
+
                 document.submitBet.submit();
             } else {
                 // first callback call result address is not given
@@ -180,6 +209,7 @@ deployContractButton.addEventListener("click", function() {
 /**
  * Create the etherscan link
  */
+// TODO global function! used wherever
 function createEtherscanIoUrl(type,hashOrNumber){
 
     var etherscanBaseUrl='https://ropsten.etherscan.io/';
@@ -214,7 +244,6 @@ function pollTransactionReceipt(transactionHash) {
             }
             else {
                 console.log(createEtherscanIoUrl('address', result.address));
-                // showDeployedContract(result.contractAddress);
             }
         }
     });

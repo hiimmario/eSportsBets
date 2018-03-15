@@ -30,7 +30,9 @@ var betSchema = new mongoose.Schema({
     ],
     contract_address: String,
     set_team: Number,
-    open_team: Number
+    set_team_name: String,
+    open_team: Number,
+    open_team_name: String
 });
 
 module.exports = mongoose.model("bet", betSchema);
