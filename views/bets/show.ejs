@@ -61,11 +61,13 @@
         </div>
 
         <input type="hidden" name="open_team" id="open_team" value="<%= match.open_team %>">
+        <input type="hidden" name="open_team_name" id="open_team_name" value="<%= match.open_team_name %>">
 
         <div class="ui inverted divider"></div>
         <button class="ui button" id="takeBetButton">Take Bet on Team <%= match.open_team %></button>
-        <button class="ui negative basic button" id="setWinnerTeam0Button">Set Winner Team 0</button>
-        <button class="ui negative basic button" id="setWinnerTeam1Button">Set Winner Team 1</button>
+        <button class="ui button" id="updateWinner">Update Winner</button>
+        <!--<button class="ui negative basic button" id="setWinnerTeam0Button">Set Winner Team 0</button>-->
+        <!--<button class="ui negative basic button" id="setWinnerTeam1Button">Set Winner Team 1</button>-->
     </div>
 
     <div class="ui comments">
