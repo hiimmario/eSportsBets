@@ -341,6 +341,7 @@ deployContractButton.addEventListener("click", function() {
             }
         } else {
             console.log("error contract.new: " + error);
+            
         }
     });
 });
