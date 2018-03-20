@@ -346,6 +346,14 @@ deployContractButton.addEventListener("click", function() {
 });
 
 
+
+
+
+
+
+
+
+
 /**
  * Create the etherscan link
  */
